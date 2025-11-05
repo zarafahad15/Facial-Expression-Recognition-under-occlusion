@@ -1,16 +1,16 @@
 # Facial-Expression-Recognition-under-occlusion
 Overview
 
-A Vision Transformer (ViT)-based model trained for facial expression recognition under partial occlusions (masks, glasses, hands). It enhances robustness using occlusion-aware augmentation and fine-tuning on the FER2013 dataset.
+A Vision Transformer (ViT)-based model for facial expression recognition, robust to partial occlusions such as masks, glasses, or hands. Trained on the FER2013 dataset, the system combines advanced data augmentation and transfer learning to improve accuracy under real-world conditions.
 
 ⸻
 
-Key Details
-	•	Model: ViT-Base (from timm)
-	•	Dataset: FER2013 (48×48 grayscale faces)
-	•	Tech: PyTorch, Albumentations, AdamW optimizer
-	•	Features: Random occlusion, Cutout, Mixed precision training
-	•	Output: Seven emotions — Angry, Disgust, Fear, Happy, Sad, Surprise, Neutral
+Features
+	•	Architecture: ViT-Base (timm)
+	•	Dataset: FER2013 (7 emotion classes)
+	•	Robustness: Occlusion simulation via random blocks and CoarseDropout
+	•	Training: AdamW optimizer, cosine scheduler, mixed precision
+	•	Evaluation: Accuracy, confusion matrix, optional attention visualization
 
 ⸻
 
@@ -25,7 +25,7 @@ pip install torch torchvision timm albumentations pandas scikit-learn matplotlib
 
 Dataset
 
-Download FER2013 and place fer2013.csv in the project root.
+Download FER2013 CSV and place it in the project root.
 
 ⸻
 
@@ -33,10 +33,8 @@ Training
 
 python train_vit_occlusion.py
 
-Default settings:
-epochs=25, batch_size=32, lr=3e-5, img_size=224
-
-The best model is saved as best_vit_occlusion.pth.
+	•	Defaults: epochs=25, batch_size=32, lr=3e-5, img_size=224
+	•	Best model saved as best_vit_occlusion.pth
 
 ⸻
 
@@ -50,23 +48,21 @@ print("Validation Accuracy:", val_acc)
 
 Results
 
-Model	Accuracy	Note
+Model	Accuracy	Notes
 ViT-Base (no occlusion)	~71%	Baseline
-ViT-Base (occlusion-trained)	~77%	Robust version
+ViT-Base (occlusion-trained)	~77%	Robust to partial occlusion
 
 
 ⸻
 
-Future Work
+Extensions
 	•	Multi-dataset training (RAF-DB, AffectNet)
 	•	Hybrid CNN-ViT fusion
-	•	Explainability via attention maps
-	•	Gradio/FastAPI deployment
+	•	Explainability with attention heatmaps
+	•	Deployment via Gradio/FastAPI
 
 ⸻
 
 License
 
 MIT License — free to use and modify with attribution.
-
-⸻
